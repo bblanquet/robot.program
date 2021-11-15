@@ -11,7 +11,7 @@ class Socket:
                                            on_message=self.__on_message,
                                            on_error=self.__on_error,
                                            on_close=self.__on_close)
-
+        
     def run(self):
         self.__ws.run_forever()
 
@@ -33,5 +33,4 @@ class Socket:
         print("### open ###")
 
     def send(self, data):
-        print("### send ###")
         self.__ws.send(data)

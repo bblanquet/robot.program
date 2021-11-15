@@ -1,3 +1,4 @@
+
 from picamera.camera import PiCamera
 from ActionKind import ActionKind
 from car.Doer import Doer
@@ -16,8 +17,9 @@ class Camera(Doer):
         self._is_busy = False
     
     def _execute(self, action:ActionKind):
-        while self._is_busy:
-            self.camera.capture(self.buffer, format='jpeg')
+        for _ in self.camera.capture_continuous(self.buffer, format='jpeg'):
+            if not self._is_busy:
+                break
             self.buffer.seek(0)
             base64_output = base64.b64encode(self.buffer.getvalue())
             self.on_capture.fire(base64_output)
