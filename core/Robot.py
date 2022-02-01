@@ -12,6 +12,8 @@ from picamera.camera import PiCamera
 class Robot:
     def __init__(self, url: str):
         piCam = PiCamera()
+        piCam.resolution = (320, 240)#640, 480
+        piCam.framerate = 2
         pic = Picture(piCam)
         pic.on_capture += self.__on_capture
         cam = Camera(piCam)
